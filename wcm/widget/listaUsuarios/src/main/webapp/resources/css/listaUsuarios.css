@@ -1,0 +1,8 @@
+.painel { background: #fff; border-radius: 4px; padding: 24px; box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+.painel-topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.painel-topo h2 { margin: 0; font-size: 22px; color: #333; }
+.painel .btn { height: 34px; padding: 0 14px; border: 1px solid #bbb; border-radius: 3px; background: #fff; font-weight: 600; cursor: pointer; }
+.painel table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.painel th { text-align: left; padding: 10px 12px; border-bottom: 2px solid #ddd; color: #444; }
+.painel td { padding: 12px; border-bottom: 1px solid #eee; color: #333; }
+.painel tbody tr:nth-child(odd) td { background: #fafafa; }

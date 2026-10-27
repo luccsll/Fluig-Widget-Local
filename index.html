@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listaUsuarios · local</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block">
+
+    <!-- Style Guide do Fluig, ou o design system da sua equipe -->
+    <!-- <link rel="stylesheet" href="[CSS DO STYLE GUIDE]"> -->
+    <link rel="stylesheet" href="./wcm/widget/listaUsuarios/src/main/webapp/resources/css/listaUsuarios.css">
+
+    <style>
+        /* ==========================================================
+           ESTILOS BASE DO FLUIG - réplica para o ambiente local
+           Mantém o visual local igual ao do servidor
+           ========================================================== */
+        html {
+            height: 100dvh;
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            -o-text-size-adjust: 100%;
+            text-rendering: optimizeLegibility;
+            -webkit-text-rendering: optimizeLegibility;
+            -moz-text-rendering: optimizeLegibility;
+            -ms-text-rendering: optimizeLegibility;
+            -o-text-rendering: optimizeLegibility;
+        }
+
+        body {
+            display: block;
+            float: left;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            padding: 100px 25px 0 90px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            color: #FFF;
+            direction: ltr;
+            font-size: 14px;
+            font-family: "Open Sans", Arial, sans-serif;
+            line-height: 1em;
+            text-align: left;
+        }
+
+        p {
+            /* margin: 0 0 16px 0; */
+            line-height: 22px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: normal;
+        }
+
+        body,
+        td,
+        th {
+            font-size: 12px;
+            color: #000;
+        }
+
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0;
+            min-height: 100%;
+            min-width: 100%;
+            position: relative;
+        }
+
+        div {
+            display: block;
+            unicode-bidi: isolate;
+        }
+
+        /* ==========================================================
+           NAVS DO FLUIG (header superior + menu lateral) - réplica
+           do portal para uso local
+           ========================================================== */
+        .as,
+        .hide,
+        .btn-toggle-menu,
+        .btn-search,
+        .menu-item-title,
+        .inner-header-search-navbar,
+        .inner-header-notification-navbar,
+        .wcm_alert_popup {
+            display: none !important;
+        }
+
+        /* ---------- header superior ---------- */
+        .responsive-header-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 81px;
+            z-index: 1000;
+            background: #818181;
+            box-sizing: border-box;
+        }
+
+        .listaUsuarios {
+            position: relative;
+        }
+
+        .responsive-header-navbar .container-fluid {
+            height: 80px;
+            padding: 0 8px 0 15px;
+        }
+
+        .responsive-header-navbar .inner-header-navbar {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 12px;
+        }
+
+        .responsive-header-navbar .inner-col {
+            display: flex;
+            align-items: center;
+        }
+
+        .responsive-header-navbar .inner-col.fs-full-width {
+            flex: 1;
+            width: auto;
+            margin-left: 12px;
+        }
+
+        .responsive-header-brand {
+            display: flex;
+            align-items: center;
+            width: 88px;
+        }
+
+        .responsive-header-brand-logo {
+            width: 88px;
+            height: auto;
+            max-height: 48px;
+            object-fit: contain;
+        }
+
+        .responsive-header-navbar form {
+            position: relative;
+            width: 100%;
+            margin: 0;
+        }
+
+        .responsive-header-navbar input[type="text"] {
+            box-sizing: border-box;
+            width: 100%;
+            height: 40px;
+            padding: 0 40px 0 17px;
+            border: 0;
+            border-radius: 3px;
+            background: #fff;
+            font-family: "Open Sans", Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
+
+        .responsive-header-navbar input::placeholder {
+            color: #b5b5b5;
+        }
+
+        .responsive-header-navbar form .form-control-feedback {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+            pointer-events: none;
+        }
+
+        .responsive-header-navbar .item-header-action {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+        }
+
+        .responsive-header-navbar .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 0;
+            cursor: pointer;
+            font-family: "Open Sans", Arial, sans-serif;
+        }
+
+        .responsive-header-navbar .btn-primary {
+            height: 40px;
+            padding: 0 16px;
+            border-radius: 3px;
+            background: #5c5c5c;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .responsive-header-navbar .btn-link {
+            background: transparent;
+            color: #fff;
+            padding: 6px;
+        }
+
+        .btn-notification {
+            position: relative;
+        }
+
+        .global-notifications-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1fbf75;
+        }
+
+        .responsive-header-navbar .media-object {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #3a2a2a;
+        }
+
+        .responsive-header-navbar .container-popover-menu-profile {
+            margin-left: 14px;
+        }
+
+        /* ---------- menu lateral ---------- */
+        .menu-responsive {
+            position: fixed;
+            top: 81px;
+            left: 0;
+            bottom: 0;
+            width: 70px !important;
+            height: auto !important;
+            z-index: 999;
+            background: #818181;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            scrollbar-width: none;
+        }
+
+        .menu-responsive::-webkit-scrollbar {
+            display: none;
+        }
+
+        .menu-responsive .menu-level {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-responsive .menu-item {
+            position: relative;
+            list-style: none;
+        }
+
+        .menu-responsive .menu-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .menu-responsive .menu-link:hover,
+        .menu-responsive .menu-link.active-menu {
+            background: rgba(0, 0, 0, .18);
+        }
+
+        .menu-responsive .menu-font-icon {
+            font-style: normal;
+            color: #fff;
+        }
+
+        .menu-responsive .menu-item-more {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            color: #fff;
+        }
+
+        /* rodapé de versão (barra inferior) */
+        .menu-responsive .version-template {
+            position: fixed;
+            left: 68px;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 40px;
+            padding: 0 14px 0 8px;
+            background: #f5f5f5;
+            border-top: 1px solid #e3e3e3;
+            font-size: 11px;
+            color: #333;
+            z-index: 998;
+        }
+
+        .menu-responsive .footer-sidebar {
+            display: flex;
+            gap: 6px;
+            background: transparent;
+            padding: 0;
+            text-align: left;
+        }
+
+        .menu-responsive .footer-sidebar p {
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .menu-responsive .footer-sidebar a {
+            color: inherit;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .menu-responsive .footer-sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .menu-responsive .text-danger {
+            color: #e5202b;
+        }
+
+        /* ---------- ícones (flaticon/fluigicon -> Material Symbols) ---------- */
+        .flaticon::before,
+        .fluigicon::before {
+            font-family: "Material Symbols Outlined";
+            font-style: normal;
+            font-weight: normal;
+            font-size: 22px;
+            line-height: 1;
+            display: inline-block;
+            content: "help";
+            font-feature-settings: "liga";
+        }
+
+        .flaticon-menu::before {
+            content: "menu";
+        }
+
+        .flaticon-search::before {
+            content: "search";
+        }
+
+        .flaticon-custom::before {
+            content: "tune";
+            font-size: 18px;
+        }
+
+        .flaticon-bell::before {
+            content: "notifications";
+        }
+
+        .flaticon-arrow-left::before {
+            content: "arrow_back";
+        }
+
+        .flaticon-more-vert::before {
+            content: "more_vert";
+        }
+
+        .flaticon-home::before {
+            content: "home";
+        }
+
+        .flaticon-rocket::before {
+            content: "rocket_launch";
+        }
+
+        .flaticon-star::before {
+            content: "star";
+        }
+
+        .flaticon-documents::before {
+            content: "content_copy";
+        }
+
+        .flaticon-process::before {
+            content: "conversion_path";
+        }
+
+        .flaticon-desktop-list::before {
+            content: "list_alt";
+        }
+
+        .flaticon-message::before {
+            content: "chat_bubble";
+        }
+
+        .flaticon-group-person::before {
+            content: "groups";
+        }
+
+        .flaticon-settings::before {
+            content: "settings";
+        }
+
+        .flaticon-trash::before {
+            content: "delete";
+        }
+
+        .fluigicon-brand::before {
+            content: "local_fire_department";
+        }
+
+        .flaticon-page-default::before {
+            content: "public";
+        }
+
+        .flaticon-document-check::before {
+            content: "assignment_turned_in";
+        }
+
+        .flaticon-file-person::before {
+            content: "contact_page";
+        }
+
+        .flaticon-trending-up::before {
+            content: "trending_up";
+        }
+
+        .flaticon-grid-view::before {
+            content: "grid_view";
+        }
+
+        .flaticon-grid::before {
+            content: "apps";
+        }
+
+        .flaticon-assignment::before {
+            content: "assignment";
+        }
+
+        .flaticon-shop::before {
+            content: "storefront";
+        }
+
+        .flaticon-playlist-add-check::before {
+            content: "playlist_add_check";
+        }
+
+        .flaticon-document-settings::before {
+            content: "description";
+        }
+
+        .flaticon-contact-phone::before {
+            content: "contact_phone";
+        }
+
+        .flaticon-receipt::before {
+            content: "receipt_long";
+        }
+
+        .flaticon-language::before {
+            content: "language";
+        }
+
+        .flaticon-image::before {
+            content: "image";
+        }
+
+        .flaticon-community-person::before {
+            content: "diversity_3";
+        }
+
+        .flaticon-account-circle::before {
+            content: "account_circle";
+        }
+
+        .flaticon-local-offer::before {
+            content: "sell";
+        }
+
+        .flaticon-cash-transfer::before {
+            content: "payments";
+        }
+
+        .flaticon-transport::before {
+            content: "local_shipping";
+        }
+
+        .flaticon-important::before {
+            content: "error";
+            font-size: 18px;
+        }
+
+        .flaticon-chevron-right::before {
+            content: "chevron_right";
+            font-size: 16px;
+        }
+
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========================================= TOPO DO FLUIG (réplica) -->
+    <nav class="responsive-header-navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="inner-header-navbar">
+                <div class="inner-col">
+                    <a class="responsive-header-brand" href="#">
+                        <img class="responsive-header-brand-logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='88' height='32' viewBox='0 0 88 32'><text x='0' y='22' font-family='Arial' font-weight='700' font-size='16' fill='%23ffffff'>LOGO</text></svg>" alt="Logo">
+                    </a>
+                </div>
+                <div class="inner-col fs-full-width">
+                    <form action="#" autocomplete="off">
+                        <input type="text" placeholder="Digite o que deseja buscar?">
+                        <i class="flaticon flaticon-search form-control-feedback" aria-hidden="true"></i>
+                    </form>
+                </div>
+                <div class="inner-col" style="height: 40px;">
+                    <button class="btn btn-primary item-header-action" type="button">
+                        Editar página <i class="flaticon flaticon-custom" aria-hidden="true"></i>
+                    </button>
+                    <div class="item-header-action">
+                        <button class="btn btn-link btn-notification" type="button">
+                            <div class="global-notifications-badge"></div>
+                            <i class="flaticon flaticon-bell" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="item-header-action container-popover-menu-profile">
+                        <img class="media-object" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><rect width='40' height='40' fill='%23c9d1de'/><circle cx='20' cy='15.5' r='7' fill='%23ffffff'/><path d='M6 40 C6 30 12 25 20 25 C28 25 34 30 34 40 Z' fill='%23ffffff'/></svg>" alt="Usuário" width="40" height="40">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================= MENU LATERAL DO FLUIG (réplica) -->
+    <nav class="menu-responsive">
+        <ul class="menu-level">
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-home" title="Home"></i>
+                    <span class="menu-item-title" title="Home">Home</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-rocket" title="Store"></i>
+                    <span class="menu-item-title" title="Store">Store</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-star" title="Favoritos"></i>
+                    <span class="menu-item-title" title="Favoritos">Favoritos</span>
+                    <span class="menu-item-more"><i class="flaticon flaticon-chevron-right"></i></span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-documents" title="Documentos"></i>
+                    <span class="menu-item-title" title="Documentos">Documentos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-process" title="Processos"></i>
+                    <span class="menu-item-title" title="Processos">Processos</span>
+                    <span class="menu-item-more"><i class="flaticon flaticon-chevron-right"></i></span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-desktop-list" title="Central de Tarefas"></i>
+                    <span class="menu-item-title" title="Central de Tarefas">Central de Tarefas</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-message" title="Social"></i>
+                    <span class="menu-item-title" title="Social">Social</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-group-person" title="Comunidades"></i>
+                    <span class="menu-item-title" title="Comunidades">Comunidades</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-settings" title="Painel de Controle"></i>
+                    <span class="menu-item-title" title="Painel de Controle">Painel de Controle</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon flaticon flaticon-trash" title="Lixeira"></i>
+                    <span class="menu-item-title" title="Lixeira">Lixeira</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="#">
+                    <i class="menu-font-icon fluigicon fluigicon-brand" title="Fluig"></i>
+                    <span class="menu-item-title" title="Fluig">Fluig</span>
+                    <span class="menu-item-more"><i class="flaticon flaticon-chevron-right"></i></span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link active-menu" href="#">
+                    <i class="menu-font-icon flaticon flaticon-page-default" title="Minha página"></i>
+                    <span class="menu-item-title" title="Minha página">Minha página</span>
+                </a>
+            </li>
+        </ul>
+        <div class="version-template">
+            <div class="footer-sidebar">
+                <p title="TOTVS Fluig Plataforma">TOTVS Fluig Plataforma</p>
+                <p>·</p>
+                <p>Criado por <a href="https://lucaslima.dev" target="_blank" rel="noopener">Lucas Lima · lucaslima.dev</a></p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========================================================
+         SUA WIDGET: É AQUI QUE VOCÊ DESENVOLVE
+         Substitua este bloco pelo HTML do view.ftl da sua widget
+         e troque o ${instanceId} por "local".
+         Quando terminar, leve as mudanças de volta para o view.ftl.
+         ========================================================= -->
+    <div id="listaUsuarios_local" class="super-widget wcm-widget-class listaUsuarios fluig-style-guide"
+        data-params="MyWidget.instance()">
+        <div class="painel">
+            <div class="painel-topo">
+                <h2>Usuários ativos</h2>
+                <button class="btn btn-default" data-atualizar>Atualizar</button>
+            </div>
+            <table class="table table-striped" id="tabelaUsuarios_local">
+                <thead>
+                    <tr><th>Nome</th><th>Login</th><th>E-mail</th><th>Matrícula</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <!-- ========================================= FIM DA SUA WIDGET -->
+
+    <!-- Ambiente local: não vai para o Fluig -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="./preview.mock.js"></script>
+    <script src="./preview.local.js"></script>
+
+    <!-- JS real da widget -->
+    <script src="./wcm/widget/listaUsuarios/src/main/webapp/resources/js/listaUsuarios.js"></script>
+</body>
+
+</html>
